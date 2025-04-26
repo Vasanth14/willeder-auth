@@ -39,7 +39,7 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
         {...form.getInputProps('password')}
       />
       <Link to={'/forget-password'}>
-        <Text ta={'right'} color="blue.5" td={'underline'} fw={700} fz={'xxs'}>
+        <Text ta={'right'} color="black" td={'underline'} fw={900} fz={'xxs'}>
           Forget Password
         </Text>
       </Link>

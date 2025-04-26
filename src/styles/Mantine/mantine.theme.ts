@@ -4,9 +4,9 @@ import buttonVariants from './button'
 
 export const theme: MantineThemeOverride = {
   focusRing: 'never',
-  fontFamily: 'Lato-Light, sans-serif',
+  fontFamily: 'Roboto, sans-serif',
   headings: {
-    fontFamily: 'Lato-Light',
+    fontFamily: 'Roboto',
     fontWeight: 700,
     sizes: {
       h1: { fontSize: rem(64) },

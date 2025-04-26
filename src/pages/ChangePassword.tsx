@@ -1,30 +1,71 @@
+// src/pages/ResetPasswordPage/ResetPasswordPage.tsx
 import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import ChangePasswordSection from 'common/components/organisms/ChangePasswordSection';
+import { resetPassword } from 'services/api/auth';
 
-const ChangePasswordPage = () => {
-  // Initialize state for the old and new password fields
-  const [formData, setFormData] = useState({ oldPassword: '', newPassword: '' });
+const ResetPasswordPage = () => {
+  const { token } = useParams<{ token: string }>();
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    password: '',
+    confirmPassword: ''
+  });
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Handle input changes for both passwords
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
+    setError(null);
   };
 
-  // Handle the form submission, ideally call an API to change the password
-  const handleSubmit = () => {
-    console.log('Resetting password with data:', formData);
-    // Add your API or password change logic here
+  const handleSubmit = async () => {
+    // Frontend validation
+    if (!formData.password || !formData.confirmPassword) {
+      setError('Please fill in both fields');
+      return;
+    }
+
+    if (formData.password.length < 8) {
+      setError('Password must be at least 8 characters');
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    if (!token) {
+      setError('Invalid reset link');
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      // Only send the password to the API
+      await resetPassword(token, formData.password);
+      navigate('/login?reset=success');
+    } catch (error) {
+      setError('Failed to reset password. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <ChangePasswordSection
-      title="Reset Password"
-      data={formData}
-      onChange={handleChange}
-      onSubmit={handleSubmit} // Pass handleSubmit which doesn't expect any arguments
-    />
+      <ChangePasswordSection
+        title="Reset Password"
+        data={formData}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+        error={error || undefined}
+        isLoading={isLoading}
+      />
   );
 };
 
-export default ChangePasswordPage;
+export default ResetPasswordPage;
