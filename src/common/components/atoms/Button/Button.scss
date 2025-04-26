@@ -1,0 +1,109 @@
+.mantine-Button-root {
+  height: 35px;
+  color: var(--mantine-color-gray-0);
+}
+
+// variants
+.primary {
+  background-color: var(--mantine-color-gray-9);
+  &:hover {
+    background-color: var(--mantine-color-gray-9);
+  }
+}
+.secondary {
+  background-color: var(--mantine-color-gray-4);
+  &:hover {
+    background-color: var(--mantine-color-gray-4);
+  }
+}
+.delivered {
+  background-color: var(--mantine-color-green-6);
+  &:hover {
+    background-color: var(--mantine-color-green-6);
+  }
+}
+.shipped {
+  background-color: var(--mantine-color-blue-3);
+  &:hover {
+    background-color: var(--mantine-color-blue-3);
+  }
+}
+.notDelivered {
+  background-color: var(--mantine-color-red-4);
+  &:hover {
+    background-color: var(--mantine-color-red-4);
+  }
+}
+
+.changetoDeliver,
+.changetoPackage,
+.changetoCancel,
+.changetoNotDeliver {
+  background: var(--mantine-color-gray-1);
+  box-shadow: var(--mantine-shadow-sm);
+  color: var(--mantine-color-gray-9);
+  height: 43px;
+  padding-left: unset;
+  padding-right: unset;
+  width: 73px;
+  .mantine-Button-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    padding: 2px;
+    font-size: var(--mantine-font-size-xxs);
+    .mantine-Button-leftIcon {
+      margin: 0px;
+      & > svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+  &:hover {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(var(--mantine-color-gray-9), 0.1)),
+      var(--mantine-color-gray-1);
+  }
+}
+
+.changetoNotDeliver {
+  color: var(--mantine-color-red-3);
+  .mantine-Button-inner {
+    .mantine-Button-leftIcon {
+      & > svg {
+        fill: var(--mantine-color-red-3);
+      }
+    }
+  }
+}
+.changetoDeliver {
+  color: var(--mantine-color-blue-3);
+  .mantine-Button-inner {
+    .mantine-Button-leftIcon {
+      & > svg {
+        fill: var(--mantine-color-blue-3);
+      }
+    }
+  }
+}
+.changetoPackage {
+  color: var(--mantine-color-green-6);
+  .mantine-Button-inner {
+    .mantine-Button-leftIcon {
+      & > svg {
+        fill: var(--mantine-color-green-6);
+      }
+    }
+  }
+}
+.changetoCancel {
+  .mantine-Button-inner {
+    .mantine-Button-leftIcon {
+      & > svg {
+        fill: var(--mantine-color-gray-9);
+      }
+    }
+  }
+}
