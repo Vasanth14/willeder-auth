@@ -1,15 +1,24 @@
+.dashboardsection {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+}
+
 table {
   border-spacing: 0px;
   width: 100%;
+
   thead {
     background-color: var(--mantine-color-gray-9);
     color: var(--mantine-color-gray-0);
+
     tr {
       th {
         padding: 8px 24px;
       }
     }
   }
+
   tbody {
     tr {
       td {

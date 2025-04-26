@@ -45,7 +45,7 @@ const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
         {...form.getInputProps('address')}
       />
       <Input
-        placeholder="Enter your email"
+        placeholder="Enter your e-mail address"
         label="Email"
         type="email"
         {...form.getInputProps('email')}

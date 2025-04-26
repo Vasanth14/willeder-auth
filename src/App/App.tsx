@@ -3,12 +3,14 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import DashboardTable from 'common/components/molecules/DashboardTable';
 import LoginPage from 'pages/Login';
 import RegisterPage from 'pages/Register';
+import ChangePasswordPage from 'pages/ChangePassword';
+import ForgotPasswordPage from 'pages/ForgotPassword';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('accessToken');
     if (token) {
       setIsAuthenticated(true);
     }
@@ -20,6 +22,8 @@ const App = () => {
         {/* Public Routes */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/reset-password" element={<ChangePasswordPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
         {/* Protected Route */}
         <Route
@@ -28,7 +32,7 @@ const App = () => {
         />
 
         {/* 404 or Catch-all Route */}
-        <Route path="*" element={<div>404 - Page Not Found</div>} />
+        <Route path="*"  element={<LoginPage />}  />
       </Routes>
     </div>
   );
