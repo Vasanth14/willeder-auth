@@ -1,19 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import LoginSection from 'common/components/organisms/LoginSection';
 import { loginUser } from 'services/api/auth';
-import { useNavigate } from 'react-router-dom';
+import useRedirectIfLoggedIn from 'common/hooks/useRedirectIfLoggedIn';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
-  const navigate = useNavigate();
 
-  // Check if user is already logged in
-  useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-    if (accessToken) {
-      navigate('/dashboard');
-    }
-  }, [navigate]);
+  useRedirectIfLoggedIn('/dashboard');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -28,10 +21,9 @@ const LoginPage = () => {
       localStorage.setItem('accessToken', response.accessToken);
       localStorage.setItem('refreshToken', response.refreshToken);
 
-      navigate('/dashboard');
+      window.location.href = '/dashboard';
     } catch (error) {
       console.error('Login failed:', error);
-      // Show error to user (optional)
     }
   };
 

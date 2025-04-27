@@ -3,8 +3,12 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ChangePasswordSection from 'common/components/organisms/ChangePasswordSection';
 import { resetPassword } from 'services/api/auth';
+import useRedirectIfLoggedIn from 'common/hooks/useRedirectIfLoggedIn';
 
 const ResetPasswordPage = () => {
+
+  useRedirectIfLoggedIn('/dashboard');
+
   const { token } = useParams<{ token: string }>();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -21,7 +25,6 @@ const ResetPasswordPage = () => {
   };
 
   const handleSubmit = async () => {
-    // Frontend validation
     if (!formData.password || !formData.confirmPassword) {
       setError('Please fill in both fields');
       return;
@@ -46,7 +49,6 @@ const ResetPasswordPage = () => {
     setError(null);
 
     try {
-      // Only send the password to the API
       await resetPassword(token, formData.password);
       navigate('/login?reset=success');
     } catch (error) {

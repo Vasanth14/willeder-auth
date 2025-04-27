@@ -3,19 +3,24 @@ import ForgotPasswordSection from 'common/components/organisms/ForgotPasswordSec
 import { forgotPassword } from 'services/api/auth';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError } from 'axios';
+import useRedirectIfLoggedIn from 'common/hooks/useRedirectIfLoggedIn';
+import { Text } from '@mantine/core';
 
 const ForgotPasswordPage = () => {
+  useRedirectIfLoggedIn('/dashboard');
   const [formData, setFormData] = useState({ email: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null); // State to store success message
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
-    // Clear errors when user starts typing
-    if (error) setError(null);
+
+    if (error) setError(null); // Clear error on change
+    if (successMessage) setSuccessMessage(null); // Clear success message on change
   };
 
   const handleForgotPassword = async (data: { email: string }) => {
@@ -28,31 +33,30 @@ const ForgotPasswordPage = () => {
     setIsLoading(true);
     setError(null);
     setSuccess(false);
-    
+    setSuccessMessage(null); // Clear success message
+
     try {
       console.log('Initiating password reset for:', data.email);
       const response = await forgotPassword(data.email);
-      
+
       console.log('API Response:', {
         status: response.status,
         data: response.data,
-        headers: response.headers
+        headers: response.headers,
       });
 
-      // Handle successful response (200/204)
       if ([200, 204].includes(response.status)) {
         setSuccess(true);
+        setSuccessMessage('Email has been sent. Please check your inbox.'); // Set success message
       } else {
         throw new Error(response.data?.message || 'Unexpected response from server');
       }
     } catch (error) {
       console.error('Password reset error:', error);
-      
+
       let errorMessage = 'Failed to send reset instructions';
       if (error instanceof AxiosError) {
-        errorMessage = error.response?.data?.message || 
-                      error.message || 
-                      'Server error occurred';
+        errorMessage = error.response?.data?.message || error.message || 'Server error occurred';
       } else if (error instanceof Error) {
         errorMessage = error.message;
       }
@@ -69,7 +73,21 @@ const ForgotPasswordPage = () => {
       data={formData}
       onChange={handleChange}
       onSubmit={handleForgotPassword}
-    />
+    >
+      {/* Success Message */}
+      {success && (
+        <Text color="green" size="xs" align="start">
+          A reset link has been sent to your email. Please check your inbox.
+        </Text>
+      )}
+
+      {/* Error Message */}
+      {error && (
+        <Text color="red" size="xs" align="start">
+          {error}
+        </Text>
+      )}
+    </ForgotPasswordSection>
   );
 };
 

@@ -1,0 +1,43 @@
+.pagecontrols {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    margin-top: 20px;
+
+    button {
+        border-radius: 10px;
+        padding: 14px 20px;
+        border: 1px solid #1d1d1d;
+        cursor: pointer;
+    }
+
+    button:disabled {
+        cursor: not-allowed;
+    }
+
+    span {
+        font-size: 16px;
+    }
+}
+
+nav {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px;
+    margin: 20px 0px;
+    border-radius: 20px;
+    background: #fff;
+
+    h4 {
+        margin: 0px;
+    }
+
+    button {
+        border-radius: 10px;
+        padding: 10px 14px;
+        border: 1px solid #1d1d1d;
+        cursor: pointer;
+    }
+}

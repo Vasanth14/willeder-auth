@@ -8,6 +8,7 @@ interface ForgotPasswordSectionProps {
   data: { email: string };
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (data: { email: string }) => void;
+  children?: React.ReactNode; // Add children prop
 }
 
 const ForgotPasswordSection = ({
@@ -15,6 +16,7 @@ const ForgotPasswordSection = ({
   data,
   onChange,
   onSubmit,
+  children, // Destructure children
 }: ForgotPasswordSectionProps) => {
   return (
     <section className="forgot-password-section">
@@ -22,6 +24,7 @@ const ForgotPasswordSection = ({
         {title}
       </Title>
       <ForgotPasswordForm data={data} onChange={onChange} onSubmit={onSubmit} />
+      {children}
     </section>
   );
 };

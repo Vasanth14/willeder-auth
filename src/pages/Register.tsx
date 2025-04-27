@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import RegisterSection from 'common/components/organisms/RegisterSection';
-import { registerUser } from 'services/api/auth'; 
+import { registerUser } from 'services/api/auth';
 import { useNavigate } from 'react-router-dom';
+import useRedirectIfLoggedIn from 'common/hooks/useRedirectIfLoggedIn';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
+  
+  useRedirectIfLoggedIn('/dashboard');
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -35,11 +39,11 @@ const RegisterPage = () => {
       );
       console.log('Registration successful:', response);
   
-      // Optional: Redirect to login page after successful register
+      
       navigate('/login');
     } catch (error) {
       console.error('Registration failed:', error);
-      // Optional: Show an error message to the user
+      
     }
   };
 
