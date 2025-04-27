@@ -3,11 +3,17 @@ import LoginForm from 'common/components/molecules/LoginForm';
 import { Title } from '@mantine/core';
 import './LoginSection.scss';
 
+interface UserLogin {
+  email: string;
+  password: string;
+}
+
 interface LoginSectionProps {
   title: string;
-  data: { email: string; password: string };
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onLogin: (data: { email: string; password: string }) => void;
+  data: UserLogin;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onLogin: (data: UserLogin) => void;
+  isLoading?: boolean;
 }
 
 const LoginSection = ({
@@ -15,13 +21,19 @@ const LoginSection = ({
   data,
   onChange,
   onLogin,
+  isLoading = false,
 }: LoginSectionProps) => {
   return (
     <section className="login-section">
       <Title order={3} ta="center">
         {title}
       </Title>
-      <LoginForm data={data} onChange={onChange} onSubmit={onLogin} />
+      <LoginForm
+        data={data}
+        onChange={onChange}
+        onSubmit={onLogin}
+        isLoading={isLoading}
+      />
     </section>
   );
 };

@@ -5,6 +5,7 @@ import useRedirectIfLoggedIn from 'common/hooks/useRedirectIfLoggedIn';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [isLoading, setIsLoading] = useState(false); // 
 
   useRedirectIfLoggedIn('/dashboard');
 
@@ -14,6 +15,7 @@ const LoginPage = () => {
   };
 
   const handleLogin = async (data: { email: string; password: string }) => {
+    setIsLoading(true); // 
     try {
       const response = await loginUser(data.email, data.password);
       console.log('Login successful:', response);
@@ -24,6 +26,8 @@ const LoginPage = () => {
       window.location.href = '/dashboard';
     } catch (error) {
       console.error('Login failed:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -33,6 +37,7 @@ const LoginPage = () => {
       data={formData}
       onChange={handleChange}
       onLogin={handleLogin}
+      isLoading={isLoading} 
     />
   );
 };

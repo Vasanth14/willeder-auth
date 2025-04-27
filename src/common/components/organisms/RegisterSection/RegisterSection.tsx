@@ -5,15 +5,13 @@ import './RegisterSection.scss';
 
 interface RegisterSectionProps {
   title: string;
-  data: { name: string; phone: string; address: string; email: string; password: string };
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isLoading?: boolean;
   onRegister: (data: { name: string; phone: string; address: string; email: string; password: string }) => void;
 }
 
 const RegisterSection = ({
   title,
-  data,
-  onChange,
+  isLoading = false,
   onRegister,
 }: RegisterSectionProps) => {
   return (
@@ -21,7 +19,7 @@ const RegisterSection = ({
       <Title order={3} ta="center">
         {title}
       </Title>
-      <RegisterForm data={data} onChange={onChange} onSubmit={onRegister} />
+      <RegisterForm onSubmit={onRegister} isLoading={isLoading} />
     </section>
   );
 };

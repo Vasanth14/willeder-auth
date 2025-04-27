@@ -10,5 +10,6 @@ interface UserRegister {
     data: UserRegister;
     onChange: React.ChangeEventHandler<HTMLInputElement>;
     onSubmit: (data: UserRegister) => void;
+    isLoading?: boolean;
   }
   

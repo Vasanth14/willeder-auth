@@ -7,4 +7,6 @@ interface LoginFormProps {
   data: UserLogin
   onChange: React.ChangeEventHandler<HTMLInputElement>
   onSubmit: (data: UserLogin) => void
+  error?: string
+  isLoading?: boolean
 }

@@ -7,7 +7,7 @@ import { Anchor } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { Link } from 'react-router-dom'
 
-const LoginForm = ({ onSubmit }: LoginFormProps) => {
+const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
   const form = useForm({
     initialValues: {
       password: '',
@@ -23,25 +23,27 @@ const LoginForm = ({ onSubmit }: LoginFormProps) => {
       })}
     >
       <Input
-        placeholder={'Enter your username'}
-        label={'Email/Username'}
-        type={'email'}
+        placeholder="Enter your username"
+        label="Email/Username"
+        type="email"
+        disabled={isLoading}
         {...form.getInputProps('email')}
       />
       <Input
-        placeholder={'Enter your password'}
-        label={'Password'}
-        type={'password'}
+        placeholder="Enter your password"
+        label="Password"
+        type="password"
+        disabled={isLoading}
         {...form.getInputProps('password')}
       />
-      <Link to='/forgot-password'>
-        <Text ta={'right'} color="black" td={'underline'} fw={900} fz={'xxs'}>
+      <Link to="/forgot-password">
+        <Text ta="right" color="black" td="underline" fw={900} fz="xxs">
           Forget Password
         </Text>
       </Link>
       <div className="button-wrapper">
-        <Button fullWidth type="submit">
-          Submit
+        <Button fullWidth type="submit" disabled={isLoading} loading={isLoading}>
+          {isLoading ? 'Submitting...' : 'Submit'}
         </Button>
       </div>
     </form>

@@ -6,21 +6,9 @@ import useRedirectIfLoggedIn from 'common/hooks/useRedirectIfLoggedIn';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  
   useRedirectIfLoggedIn('/dashboard');
 
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    address: '',
-    email: '',
-    password: '',
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleRegister = async (data: {
     name: string;
@@ -29,6 +17,7 @@ const RegisterPage = () => {
     email: string;
     password: string;
   }) => {
+    setIsLoading(true);
     try {
       const response = await registerUser(
         data.name,
@@ -38,21 +27,20 @@ const RegisterPage = () => {
         data.password
       );
       console.log('Registration successful:', response);
-  
-      
+
       navigate('/login');
     } catch (error) {
       console.error('Registration failed:', error);
-      
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <RegisterSection
       title="Register"
-      data={formData}
-      onChange={handleChange}
       onRegister={handleRegister}
+      isLoading={isLoading}
     />
   );
 };
