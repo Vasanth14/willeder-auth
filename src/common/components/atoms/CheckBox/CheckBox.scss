@@ -1,0 +1,13 @@
+.custom-checkbox {
+    .mantine-Checkbox-label {
+      font-size: var(--mantine-font-size-xs);
+      font-weight: 700;
+      color: var(--mantine-color-gray-8);
+    }
+  
+    input:checked + .mantine-Checkbox-inner {
+      background-color: #228be6;
+      border-color: #228be6;
+    }
+  }
+  

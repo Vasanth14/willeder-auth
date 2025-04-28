@@ -33,7 +33,7 @@ const LoginPage = () => {
 
   return (
     <LoginSection
-      title="Login"
+      title="Hello Again!"
       data={formData}
       onChange={handleChange}
       onLogin={handleLogin}
