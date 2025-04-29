@@ -73,7 +73,7 @@ const LoginForm = ({ onSubmit, isLoading = false }: LoginFormProps) => {
         </Button>
       </div>
       <div>
-        <Link to="/forgot-password">
+        <Link to="/register">
           <Text ta="center" color="black" td="underline" fw={700} fz="xs">
             Don't have an account yet? Sign Up!
           </Text>

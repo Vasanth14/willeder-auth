@@ -94,7 +94,7 @@ const RegisterForm = ({ onSubmit, isLoading = false }: RegisterFormProps) => {
         </Button>
       </div>
       <div>
-        <Link to="/forgot-password">
+        <Link to="/login">
           <Text ta="center" color="black" td="underline" fw={700} fz="xs">
             Already have an account? Login!
           </Text>
